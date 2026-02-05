@@ -1,0 +1,4 @@
+Wortpakete
+- thai_cards_A1_200.csv: Basis A1 + Reise/Grundwortschatz
+- thai_cards_alltag_200.csv: Alltag/Thailand (Haushalt, Essen, Technik, unterwegs)
+Import in der App: Wortliste -> CSV Datei auswaehlen.
