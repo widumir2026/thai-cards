@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <title>Thai A1 Lernkarten</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Arial,sans-serif;margin:0;background:#f6f7f9}
+    .wrap{max-width:860px;margin:0 auto;padding:16px}
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .pill{background:#fff;border:1px solid #e3e6ea;padding:8px 10px;border-radius:999px;font-size:14px}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    select,input[type=file]{padding:10px 12px;border-radius:12px;border:1px solid #d7dbe0;background:#fff;font-size:16px}
+    button{border:1px solid #d7dbe0;background:#fff;padding:12px 14px;border-radius:12px;font-size:16px;cursor:pointer}
+    button.primary{background:#111827;color:#fff;border-color:#111827}
+    button.bad{background:#b91c1c;color:#fff;border-color:#b91c1c}
+    button.good{background:#047857;color:#fff;border-color:#047857}
+    button.warn{background:#b45309;color:#fff;border-color:#b45309}
+    .card{margin-top:16px;background:#fff;border:1px solid #e3e6ea;border-radius:16px;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:18px;text-align:center;box-shadow:0 1px 0 rgba(0,0,0,.03);user-select:none}
+    .lang{font-size:14px;opacity:.65;letter-spacing:.02em}
+    .word{font-size:44px;font-weight:750;margin:8px 0}
+    .word.small{font-size:28px;font-weight:650}
+    .hint{font-size:14px;opacity:.6;margin-top:6px}
+    .controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .panel{margin-top:14px;padding:12px;border:1px solid #e3e6ea;border-radius:14px;background:#fff;display:flex;flex-direction:column;gap:10px}
+    .small{font-size:12px;opacity:.65;line-height:1.35}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .grid{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="row">
+        <div class="pill"><b>Thai A1 Lernkarten</b></div>
+        <div class="pill" id="stats">-</div>
+        <div class="pill" id="offline">-</div>
+      </div>
+      <div class="row">
+        <select id="mode">
+          <option value="th->en">Thai -> Englisch</option>
+          <option value="th->de">Thai -> Deutsch</option>
+          <option value="en->th">Englisch -> Thai</option>
+          <option value="de->th">Deutsch -> Thai</option>
+          <option value="mix">Mix</option>
+        </select>
+        <button id="reset">Reset Lernen</button>
+      </div>
+    </div>
+
+    <div class="card" id="card" role="button" aria-label="Karte umdrehen">
+      <div class="lang" id="frontLang">-</div>
+      <div class="word" id="frontWord">-</div>
+      <div class="hint" id="tapHint">Tippen zum Umdrehen</div>
+
+      <div style="height:14px"></div>
+
+      <div class="lang" id="backLang" style="display:none">-</div>
+      <div class="word small" id="backWord" style="display:none">-</div>
+      <div class="small" id="backExtra" style="display:none"></div>
+    </div>
+
+    <div class="controls">
+      <button class="primary" id="flip">Umdrehen</button>
+      <button class="bad" id="again">Nochmal</button>
+      <button class="warn" id="hard">Schwer</button>
+      <button class="good" id="good">Gekonnt</button>
+      <button id="next">Naechste</button>
+      <button id="speakFront">Audio vorne</button>
+      <button id="speakBack">Audio hinten</button>
+    </div>
+
+    <div class="panel">
+      <div class="grid">
+        <div>
+          <b>Wortliste</b>
+          <div class="small">CSV Import: Spalten <span class="mono">th,roman,en,de</span> (Header Pflicht). UTF-8.</div>
+          <div class="row" style="margin-top:8px">
+            <input id="csvFile" type="file" accept=".csv,text/csv" />
+            <button id="exportCsv">Export CSV</button>
+            <button id="clearWords">Wortliste loeschen</button>
+          </div>
+          <div class="small" style="margin-top:6px">Speichert lokal im Browser (localStorage). Kein Sync.</div>
+        </div>
+
+        <div>
+          <b>Installieren (PWA)</b>
+          <div class="small">iPhone: Safari -> Teilen -> "Zum Home-Bildschirm". Android/Chrome: "Installieren". Offline nach erstem Laden.</div>
+          <div class="small" style="margin-top:6px">Status: <span id="pwaStatus">-</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="small">SM-2 light: "Nochmal" = bald, "Schwer" = mittel, "Gekonnt" = spaeter.</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
