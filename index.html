@@ -1,1 +1,36 @@
-<!doctype html><html><body>Fehler: App-Dateien fehlen.</body></html>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<title>Thai Lernkarten</title>
+<style>
+body{font-family:system-ui;margin:0;background:#f6f7f9}
+.wrap{max-width:900px;margin:auto;padding:16px}
+.card{background:#fff;border-radius:16px;padding:40px;text-align:center;font-size:42px;min-height:160px;cursor:pointer}
+.small{font-size:14px;opacity:.6;margin-top:8px}
+.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+button{padding:10px 12px;border-radius:10px;border:1px solid #ccc}
+</style>
+</head>
+<body>
+<div class="wrap">
+<select id="mode">
+<option value="th-en">Thai→Englisch</option>
+<option value="en-th">Englisch→Thai</option>
+<option value="de-th">Deutsch→Thai</option>
+</select>
+
+<input type="file" id="csv" accept=".csv"/>
+
+<div class="card" id="card">Tippen</div>
+<div class="small" id="hint"></div>
+
+<div class="controls">
+<button onclick="next()">Naechste</button>
+</div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
